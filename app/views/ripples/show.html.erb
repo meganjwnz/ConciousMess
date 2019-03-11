@@ -1,7 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <%= @ripple.name %> said...
+<% if(@ripple.url.nil? || @ripple.url.empty?) %>
+    <%= @ripple.name %>
+<% else %>
+    <%= link_to @ripple.name, "http://#{@ripple.url}" %>
+<% end %> said...
 </p>
 
 <p>

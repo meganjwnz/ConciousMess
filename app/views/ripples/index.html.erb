@@ -15,7 +15,11 @@
   <tbody>
     <% @ripples.each do |ripple| %>
       <tr>
-        <td><%= ripple.name %></td>     
+	<% if(ripple.url.nil? || ripple.url.empty?) %>
+            <td><%= ripple.name %></td>
+	<% else %>
+	    <td><%= link_to ripple.name, "http://#{ripple.url}" %></td>
+	<% end %>
         <td><%= ripple.message %></td>
 	<td><%= ripple.created_at %></td>
         <td><%= link_to 'Show', ripple %></td>    
