@@ -4,8 +4,13 @@ class RipplesController < ApplicationController
   # GET /ripples
   # GET /ripples.json
   def index
-    @ripples = Ripple.all
     @ripples = Ripple.order("created_at DESC")
+    session[:current_ripples] = @ripples.ids
+    @current_page = session[:current_ripples]
+  end
+
+  def oldest
+    @oldest = Ripple.order("created_at ASC").limit(10)
   end
 
   # GET /ripples/1
@@ -26,7 +31,6 @@ class RipplesController < ApplicationController
   # POST /ripples.json
   def create
     @ripple = Ripple.new(ripple_params)
-
     respond_to do |format|
       if @ripple.save
         format.html { redirect_to @ripple, notice: 'Ripple was successfully created.' }

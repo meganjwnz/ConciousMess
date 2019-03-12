@@ -1,7 +1,4 @@
 <p id="notice"><%= notice %></p>
-
-<h1>CONSCIOUS/mess</h1>
-<h2>...a stream of anonymous online ramblings</h2>
 <table>
   <thead>
     <tr>
@@ -20,7 +17,7 @@
 	<% else %>
 	    <td><%= link_to ripple.name, "http://#{ripple.url}" %></td>
 	<% end %>
-        <td><%= ripple.message %></td>
+        <td><%= ripple.message[0..50].gsub(/\s\w+$/,'...') %></td>
 	<td><%= ripple.created_at %></td>
         <td><%= link_to 'Show', ripple %></td>    
       </tr>
@@ -30,4 +27,8 @@
 
 <br>
 
+<%= link_to 'Newest', ripples_path %> 
+<%= link_to 'Previous 10 Ripples', ripples_path %> 
+<%= link_to 'Next 10 Ripples', ripples_path %> 
+<%= link_to 'Oldest', ripples_path %> 
 <%= link_to 'New Ripple', new_ripple_path %>
