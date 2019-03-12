@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CONSCIOUSmess</title>
+    <title>CONSCIOUS/mess</title>
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Quantico" rel="stylesheet"> 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    
   </head>
+
+<div class = wrapper>
  <header>
     <h1>CONSCIOUS/mess</h1>
     <h2>...a stream of anonymous online ramblings</h2>
@@ -17,4 +19,6 @@
   <body>
     <%= yield %>
   </body>
+</div>
+
 </html>

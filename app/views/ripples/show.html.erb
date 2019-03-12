@@ -1,15 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<div class = show_name>
 <% if(@ripple.url.nil? || @ripple.url.empty?) %>
     <%= @ripple.name %>
 <% else %>
     <%= link_to @ripple.name, "http://#{@ripple.url}" %>
 <% end %> said...
-</p>
+</div>
 
-<p>
+<div class = show_message>
   <%= @ripple.message %>
-</p>
+</div>
 
 <%= link_to 'Back', ripples_path %>

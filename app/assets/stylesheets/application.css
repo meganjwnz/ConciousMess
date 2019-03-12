@@ -22,8 +22,26 @@ header{
 
 
 th, td {
-  text-align: left;
   padding: 8px;
 }
 
 tr:nth-child(even) {background-color: #D1D1FF;}
+
+.wrapper {
+  width: 80%;
+  margin: auto;
+}
+
+.show_name {
+  font-size: 20px;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.show_message {
+  padding: 25px;
+  padding-left: 100px;
+  font-size: 15px;
+  line-height: 20px;
+  font-family: 'Quantico', sans-serif;
+}
+
