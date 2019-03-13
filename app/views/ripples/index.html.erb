@@ -8,9 +8,8 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
-    <% @ripples.each do |ripple| %>
+    <% @current_ripples.each do |ripple| %>
       <tr>
 	<% if(ripple.url.nil? || ripple.url.empty?) %>
             <td><%= ripple.name %></td>
@@ -24,11 +23,10 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
-
-<%= link_to 'Newest', ripples_path %> 
-<%= link_to 'Previous 10 Ripples', ripples_path %> 
-<%= link_to 'Next 10 Ripples', ripples_path %> 
-<%= link_to 'Oldest', ripples_path %> 
+<%= @cr %>
+<%= link_to 'Newest', ripples_path(:page_number => 1) %> |
+<%= link_to 'Previous 10 Ripples', ripples_path(:page_number => 2) %> |
+<%= link_to 'Next 10 Ripples', ripples_path(:page_number => 3) %> |
+<%= link_to 'Oldest', ripples_path(:page_number => 4) %> |
 <%= link_to 'New Ripple', new_ripple_path %>
