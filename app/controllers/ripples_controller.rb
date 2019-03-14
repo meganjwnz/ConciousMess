@@ -3,23 +3,30 @@ class RipplesController < ApplicationController
 
   # GET /ripples
   # GET /ripples.json
-  def index  
-    @page = params[:page_number].to_i
-    
-    @ripples = Ripple.order("created_at DESC")
+  def index   
+    session[:page_number] = params[:page_num].to_i 
+    @current_page = session[:page_number]
 
-    if (@page == 0) then
-      @current_ripples = @ripples.limit(10)
-    elsif (@page == 1)
-      @current_ripples = @ripples.limit(10)
-    elsif (@page == 2)
-      @current_ripples = @ripples.limit(10).offset(11)
-    elsif(@page == 3)
-     @current_ripples = @ripples.limit(10).offset(-11)
-    elsif(@page == 4)
-      @current_ripples = @ripples.last(10)
+    @id = params[:id].to_i
+
+    if ( @current_page == 4) then
+      @id = Ripple.order("created_at DESC").last.id
+      @id2 = Ripple.order("created_at DESC").last.id + 9
+    elsif ( @current_page == 3)
+      @id2 = @id + 10
+      @id = @id + 1
+    elsif ( @current_page == 2)
+      @id2 = @id - 1
+      @id = @id - 10
+    elsif ( @current_page == 1)
+      @id = Ripple.last.id - 9
+      @id2 = Ripple.last.id
+    elsif ( @current_page == 0)
+      @id = Ripple.last.id - 9
+      @id2 = Ripple.last.id
     end
     
+    @ripples = Ripple.order("created_at DESC").where(id: @id..@id2)
   end
 
   # GET /ripples/1
