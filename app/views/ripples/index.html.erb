@@ -24,9 +24,14 @@
   </tbody>
 </table>
 <br>
-<%= @cr %>
+
 <%= link_to 'Newest', ripples_path(:page_num => 1) %> |
 <%= link_to 'Previous 10 Ripples', ripples_path(:page_num => 2, :id => @ripples.ids.last) %> |
 <%= link_to 'Next 10 Ripples', ripples_path(:page_num => 3, :id => @ripples.ids.first) %> |
 <%= link_to 'Oldest', ripples_path(:page_num => 4) %> |
 <%= link_to 'New Ripple', new_ripple_path %>
+
+<%= @id1 %>
+
+<%= @id2 %>
+

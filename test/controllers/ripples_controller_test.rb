@@ -2,7 +2,7 @@ require 'test_helper'
 
 class RipplesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @ripple = ripples(:one)
+    @ripples = ripples
   end
 
   test "should get index" do
@@ -16,33 +16,44 @@ class RipplesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create ripple" do
-    assert_difference('Ripple.count') do
-      post ripples_url, params: { ripple: { message: @ripple.message, name: @ripple.name, url: @ripple.url } }
+    @ripples.each do |rip|
+      post ripples_url, params: { ripple: { message: rip.message, name: rip.name, url: rip.url } }
     end
-
-    assert_redirected_to ripple_url(Ripple.last)
-  end
-
-  test "should show ripple" do
-    get ripple_url(@ripple)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_ripple_url(@ripple)
-    assert_response :success
-  end
-
-  test "should update ripple" do
-    patch ripple_url(@ripple), params: { ripple: { message: @ripple.message, name: @ripple.name, url: @ripple.url } }
-    assert_redirected_to ripple_url(@ripple)
-  end
-
-  test "should destroy ripple" do
-    assert_difference('Ripple.count', -1) do
-      delete ripple_url(@ripple)
-    end
-
     assert_redirected_to ripples_url
+  end
+
+  test "should go backwards 10" do
+    get "/ripples"
+    assert_equal 50, assigns(:id2)
+    assert_equal 41, assigns(:id1)
+    get "/ripples?id=41&page_num=2"
+    assert_equal 2, assigns(:current_page)
+    assert_equal 40, assigns(:id2)
+    assert_equal 31, assigns(:id1)
+    get "/ripples?id=31&page_num=2"
+    assert_equal 30, assigns(:id2)
+    assert_equal 21, assigns(:id1)
+    get "/ripples?page_num=1"
+    assert_equal 50, assigns(:id2)
+    assert_equal 41, assigns(:id1)
+  end
+
+  test "should go forward 10" do
+    get "/ripples"
+    assert_equal 50, assigns(:id2)
+    assert_equal 41, assigns(:id1)
+    get "/ripples?id=41&page_num=2"
+    assert_equal 2, assigns(:current_page)
+    assert_equal 40, assigns(:id2)
+    assert_equal 31, assigns(:id1)
+    get "/ripples?id=31&page_num=2"
+    assert_equal 30, assigns(:id2)
+    assert_equal 21, assigns(:id1)
+    get "/ripples?id=30&page_num=3"
+    assert_equal 40, assigns(:id2)
+    assert_equal 31, assigns(:id1)
+    get "/ripples?id=40&page_num=3"
+    assert_equal 50, assigns(:id2)
+    assert_equal 41, assigns(:id1)
   end
 end
